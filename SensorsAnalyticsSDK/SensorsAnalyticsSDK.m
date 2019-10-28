@@ -2438,7 +2438,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
         self.anonymousId = anonymousIdInKeychain;
         if (![archivedAnonymousId isEqualToString:anonymousIdInKeychain]) {
             //保存 Archiver
-            NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
+            NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication forKey:NSFileProtectionKey];
             [[NSFileManager defaultManager] setAttributes:protection ofItemAtPath:filePath error:nil];
             if (![NSKeyedArchiver archiveRootObject:[self.anonymousId copy] toFile:filePath]) {
                 SAError(@"%@ unable to archive distinctId", self);
@@ -2481,7 +2481,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 - (void)archiveAnonymousId {
     NSString *filePath = [self filePathForData:SA_EVENT_DISTINCT_ID];
     /* 为filePath文件设置保护等级 */
-    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionComplete
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication
                                                            forKey:NSFileProtectionKey];
     [[NSFileManager defaultManager] setAttributes:protection
                                      ofItemAtPath:filePath
@@ -2498,7 +2498,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 - (void)archiveLoginId {
     NSString *filePath = [self filePathForData:@"login_id"];
     /* 为filePath文件设置保护等级 */
-    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionComplete
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication
                                                            forKey:NSFileProtectionKey];
     [[NSFileManager defaultManager] setAttributes:protection
                                      ofItemAtPath:filePath
@@ -2512,7 +2512,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 - (void)archiveFirstDay {
     NSString *filePath = [self filePathForData:@"first_day"];
     /* 为filePath文件设置保护等级 */
-    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionComplete
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication
                                                            forKey:NSFileProtectionKey];
     [[NSFileManager defaultManager] setAttributes:protection
                                      ofItemAtPath:filePath
@@ -2526,7 +2526,7 @@ static SensorsAnalyticsSDK *sharedInstance = nil;
 - (void)archiveSuperProperties {
     NSString *filePath = [self filePathForData:@"super_properties"];
     /* 为filePath文件设置保护等级 */
-    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionComplete
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication
                                                            forKey:NSFileProtectionKey];
     [[NSFileManager defaultManager] setAttributes:protection
                                      ofItemAtPath:filePath
